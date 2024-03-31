@@ -8,14 +8,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["var(--font-ibmplexsans)"],
-        inter: ["var(--font-inter)"],
-      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      colors: {
+        gray: {
+          950: "hsla(0,0%,100%,0.7)",
+          951: "hsla(0,0%,100%,0.4)",
+        },
       },
     },
   },
