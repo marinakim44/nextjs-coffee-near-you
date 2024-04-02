@@ -1,33 +1,15 @@
 import Banner from "@/components/banner.client";
 import Card from "@/components/card.server";
+import { fetchCoffeeStores } from "@/lib/coffee-stores";
+import { CoffeeStoreType } from "@/types";
 
-export default function Home() {
-  const coffeeStores = [
-    {
-      name: "Cat coffee",
-      imgUrl: "/static/img1.png",
-    },
-    {
-      name: "Coco Coffee",
-      imgUrl: "/static/img2.png",
-    },
-    {
-      name: "Game and Coffee",
-      imgUrl: "/static/img3.png",
-    },
-    {
-      name: "Lazy Sloth Coffee",
-      imgUrl: "/static/img4.png",
-    },
-    {
-      name: "Ducky Coffee",
-      imgUrl: "/static/img5.png",
-    },
-    {
-      name: "Mouse Tail Coffee",
-      imgUrl: "/static/img6.png",
-    },
-  ];
+async function getData() {
+  return await fetchCoffeeStores();
+}
+
+export default async function Home() {
+  const coffeeStores = await getData();
+
   return (
     <div className="mb-56">
       <main className="mx-auto mt-10 max-w-6xl px-4">
@@ -37,11 +19,11 @@ export default function Home() {
             London Stores
           </h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-2 lg:grid-cols-3 lg:gap-6">
-            {coffeeStores.map((c, i) => (
+            {coffeeStores.map((c: CoffeeStoreType, i: number) => (
               <Card
-                key={`${c.name}-${i}`}
+                key={c.id}
                 name={c.name}
-                imgUrl={c.imgUrl}
+                imgUrl={coffeeStores[0].imgUrl}
                 href={`/coffee-store/${i}`}
               />
             ))}
